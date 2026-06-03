@@ -1,19 +1,446 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/bg_light">
 
-    <TextView
+    <!-- 主内容区：日历固定 + 下方滚动 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- ===== 固定顶部：日历区域 ===== -->
+
+        <!-- 顶部 Tab -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:id="@+id/tabList"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingHorizontal="12dp"
+                android:text="@string/tab_list"
+                android:textColor="@color/text_secondary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tabCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingHorizontal="12dp"
+                android:text="@string/tab_calendar"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/btnSync"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_upload"
+                android:contentDescription="同步"
+                app:tint="@color/text_secondary" />
+
+        </LinearLayout>
+
+        <!-- 月份标题 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btnPrevMonth"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="6dp"
+                android:src="@android:drawable/ic_media_previous"
+                android:contentDescription="上月"
+                app:tint="@color/text_secondary" />
+
+            <TextView
+                android:id="@+id/tvMonthTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="2026 年 06 月" />
+
+            <ImageView
+                android:id="@+id/btnNextMonth"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="6dp"
+                android:src="@android:drawable/ic_media_next"
+                android:contentDescription="下月"
+                app:tint="@color/text_secondary" />
+
+        </LinearLayout>
+
+        <!-- 日历视图（固定） -->
+        <com.example.myapplication.ui.WeightCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp" />
+
+        <!-- ===== 可滚动区域 ===== -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="80dp">
+
+                <!-- 月度统计卡片 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvSummaryMonth"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                tools:text="2026 年 06 月" />
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@android:drawable/ic_menu_share"
+                                android:contentDescription="分享"
+                                app:tint="@color/text_secondary" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/gain_weight"
+                                    android:textColor="@color/weight_gain"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvGainDays"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="12sp"
+                                    tools:text="1 天" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/unchanged"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvUnchangedDays"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="12sp"
+                                    tools:text="1 天" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/lose_weight"
+                                    android:textColor="@color/weight_loss"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvLossDays"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="12sp"
+                                    tools:text="1 天" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/change"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/tvTotalChange"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/weight_change"
+                                    android:textSize="12sp"
+                                    tools:text="-1.7 斤" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- 当日记录卡片 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- 早 -->
+                        <LinearLayout
+                            android:id="@+id/rowMorning"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
+
+                            <TextView
+                                android:id="@+id/tvMorningWeight"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                tools:text="早 109.6" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                android:contentDescription=""
+                                app:tint="@color/text_hint"
+                                android:scaleX="0.6"
+                                android:scaleY="0.6" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginStart="16dp"
+                            android:background="@color/divider" />
+
+                        <!-- 晚 -->
+                        <LinearLayout
+                            android:id="@+id/rowEvening"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
+
+                            <TextView
+                                android:id="@+id/tvEveningWeight"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/text_hint"
+                                android:textSize="15sp"
+                                tools:text="晚 --" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                android:contentDescription=""
+                                app:tint="@color/text_hint"
+                                android:scaleX="0.6"
+                                android:scaleY="0.6" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginStart="16dp"
+                            android:background="@color/divider" />
+
+                        <!-- 饮食 -->
+                        <LinearLayout
+                            android:id="@+id/rowFood"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
+
+                            <TextView
+                                android:id="@+id/tvFoodRecord"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/text_hint"
+                                android:textSize="15sp"
+                                tools:text="暂无饮食记录" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                android:contentDescription=""
+                                app:tint="@color/text_hint"
+                                android:scaleX="0.6"
+                                android:scaleY="0.6" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginStart="16dp"
+                            android:background="@color/divider" />
+
+                        <!-- 运动 -->
+                        <LinearLayout
+                            android:id="@+id/rowExercise"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="16dp">
+
+                            <TextView
+                                android:id="@+id/tvExerciseRecord"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/text_hint"
+                                android:textSize="15sp"
+                                tools:text="暂无运动记录" />
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                android:contentDescription=""
+                                app:tint="@color/text_hint"
+                                android:scaleX="0.6"
+                                android:scaleY="0.6" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+    <!-- FAB 浮动按钮（覆盖在 CoordinatorLayout 上） -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:contentDescription="@string/add_record"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/fab_bg"
+        app:tint="@color/black"
+        app:fabSize="normal"
+        app:elevation="4dp"
+        app:borderWidth="0dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

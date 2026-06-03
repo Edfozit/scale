@@ -2,4 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bg_light">#FFF5F5F5</color>
+    <color name="text_primary">#FF1A1A1A</color>
+    <color name="text_secondary">#FF757575</color>
+    <color name="text_hint">#FFBDBDBD</color>
+    <color name="weight_gain">#FFF44336</color>
+    <color name="weight_loss">#FF4CAF50</color>
+    <color name="weight_unchanged">#FF9E9E9E</color>
+    <color name="weight_change">#FF2196F3</color>
+    <color name="card_bg">#FFFFFFFF</color>
+    <color name="selected_date_bg">#FFE0E0E0</color>
+    <color name="divider">#FFE0E0E0</color>
+    <color name="fab_bg">#FFFFFFFF</color>
 </resources>
