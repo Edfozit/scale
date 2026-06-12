@@ -40,6 +40,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _monthlyStats = MutableLiveData<MonthlyStats>()
     val monthlyStats: LiveData<MonthlyStats> = _monthlyStats
 
+    private val _allRecords = MutableLiveData<List<WeightRecord>>()
+    val allRecords: LiveData<List<WeightRecord>> = _allRecords
+
     init {
         val today = formatDate(
             Calendar.getInstance().get(Calendar.YEAR),
@@ -48,6 +51,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         )
         _selectedDate.value = today
         loadMonthData()
+        loadAllRecords()
     }
 
     fun setYearMonth(year: Int, month: Int) {
@@ -85,6 +89,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             dao.insert(record)
             loadMonthData()
+            loadAllRecords()
             updateSelectedRecord()
         }
     }
@@ -182,5 +187,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun formatMonthTitle(y: Int, m: Int): String {
         return String.format(Locale.getDefault(), "%d 年 %02d 月", y, m)
+    }
+
+    fun loadAllRecords() {
+        viewModelScope.launch {
+            val records = dao.getAllRecords()
+            _allRecords.postValue(records)
+        }
     }
 }
