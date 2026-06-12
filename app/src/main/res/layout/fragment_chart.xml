@@ -75,8 +75,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="12dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="1dp">
+                app:cardBackgroundColor="#F2F4F7"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp">
 
                 <com.example.myapplication.ui.WeightLineChartView
                     android:id="@+id/lineChartView"
@@ -92,13 +93,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="10dp"
+                app:cardBackgroundColor="#F2F4F7"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="1dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:gravity="center"
                     android:padding="16dp">
 
                     <!-- 第一行：最大体重 / 最小体重 / 累计变化 -->
@@ -111,6 +114,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="center_horizontal"
                             android:orientation="vertical">
 
                             <TextView
@@ -126,8 +130,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/text_primary"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
+                                android:textSize="15sp"
                                 tools:text="113.8 斤" />
 
                         </LinearLayout>
@@ -136,6 +139,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="center_horizontal"
                             android:orientation="vertical">
 
                             <TextView
@@ -151,8 +155,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/text_primary"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
+                                android:textSize="15sp"
                                 tools:text="107.9 斤" />
 
                         </LinearLayout>
@@ -161,6 +164,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="center_horizontal"
                             android:orientation="vertical">
 
                             <TextView
@@ -176,8 +180,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/weight_loss"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
+                                android:textSize="15sp"
                                 tools:text="- 4.5 斤" />
 
                         </LinearLayout>
@@ -200,6 +203,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="center_horizontal"
                             android:orientation="vertical">
 
                             <TextView
@@ -215,8 +219,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/text_primary"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
+                                android:textSize="15sp"
                                 tools:text="暂无" />
 
                         </LinearLayout>
@@ -225,6 +228,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="center_horizontal"
                             android:orientation="vertical">
 
                             <TextView
@@ -240,8 +244,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/text_primary"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
+                                android:textSize="15sp"
                                 tools:text="30 天" />
 
                         </LinearLayout>
@@ -250,6 +253,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:gravity="center_horizontal"
                             android:orientation="vertical">
 
                             <TextView
@@ -265,8 +269,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
                                 android:textColor="@color/text_primary"
-                                android:textSize="18sp"
-                                android:textStyle="bold"
+                                android:textSize="15sp"
                                 tools:text="110.5 斤" />
 
                         </LinearLayout>

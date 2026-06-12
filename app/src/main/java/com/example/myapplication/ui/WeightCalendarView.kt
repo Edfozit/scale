@@ -260,7 +260,7 @@ class WeightCalendarView @JvmOverloads constructor(
                 val hasData = record?.morningWeight != null || record?.eveningWeight != null
 
                 // 统一：所有日期数字都在同一位置（格子顶部），保证对齐
-                val dateTopY = currentY + 8f
+                val dateTopY = currentY + 10f
                 val dayText = dayCounter.toString()
                 val datePaint = when {
                     isSelected -> datePaintSelected

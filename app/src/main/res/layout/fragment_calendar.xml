@@ -103,9 +103,8 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:padding="6dp"
-                        android:src="@android:drawable/ic_media_previous"
-                        android:contentDescription="上月"
-                        app:tint="@color/text_secondary" />
+                        android:src="@drawable/ic_last_month"
+                        android:contentDescription="上月" />
 
                     <TextView
                         android:id="@+id/tvMonthTitle"
@@ -123,9 +122,8 @@
                         android:layout_width="36dp"
                         android:layout_height="36dp"
                         android:padding="6dp"
-                        android:src="@android:drawable/ic_media_next"
-                        android:contentDescription="下月"
-                        app:tint="@color/text_secondary" />
+                        android:src="@drawable/ic_next_month"
+                        android:contentDescription="下月" />
 
                 </LinearLayout>
 

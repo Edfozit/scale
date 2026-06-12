@@ -81,7 +81,7 @@ class WeightLineChartView @JvmOverloads constructor(
         if (weights.isEmpty()) return
 
         val paddingLeft = 70f
-        val paddingRight = 20f
+        val paddingRight = 50f
         val paddingTop = 36f
         val paddingBottom = 44f
 

@@ -53,8 +53,10 @@ class ChartFragment : Fragment() {
                 val delta = stats.totalDelta
                 val deltaStr = if (delta > 0) {
                     String.format("+ %.1f 斤", delta)
-                } else {
+                } else if (delta < 0) {
                     String.format("- %.1f 斤", -delta)
+                } else {
+                    String.format("%.1f 斤", 0f)
                 }
                 binding.tvTotalDelta.text = deltaStr
 
