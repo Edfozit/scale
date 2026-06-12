@@ -3,7 +3,6 @@ package com.example.myapplication
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -11,32 +10,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.data.WeightRecord
+import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.ui.MainViewModel
-import com.example.myapplication.ui.WeightCalendarView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-    private lateinit var calendarView: WeightCalendarView
-    private lateinit var tvMonthTitle: TextView
-    private lateinit var tvSummaryMonth: TextView
-    private lateinit var tvGainDays: TextView
-    private lateinit var tvUnchangedDays: TextView
-    private lateinit var tvLossDays: TextView
-    private lateinit var tvTotalChange: TextView
-    private lateinit var tvMorningWeight: TextView
-    private lateinit var tvEveningWeight: TextView
-    private lateinit var tvFoodRecord: TextView
-    private lateinit var tvExerciseRecord: TextView
-    private lateinit var fabAdd: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -44,45 +32,29 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        initViews()
         setupObservers()
         setupListeners()
-    }
-
-    private fun initViews() {
-        calendarView = findViewById(R.id.calendarView)
-        tvMonthTitle = findViewById(R.id.tvMonthTitle)
-        tvSummaryMonth = findViewById(R.id.tvSummaryMonth)
-        tvGainDays = findViewById(R.id.tvGainDays)
-        tvUnchangedDays = findViewById(R.id.tvUnchangedDays)
-        tvLossDays = findViewById(R.id.tvLossDays)
-        tvTotalChange = findViewById(R.id.tvTotalChange)
-        tvMorningWeight = findViewById(R.id.tvMorningWeight)
-        tvEveningWeight = findViewById(R.id.tvEveningWeight)
-        tvFoodRecord = findViewById(R.id.tvFoodRecord)
-        tvExerciseRecord = findViewById(R.id.tvExerciseRecord)
-        fabAdd = findViewById(R.id.fabAdd)
     }
 
     private fun setupObservers() {
         viewModel.currentYear.observe(this) { year ->
             val month = viewModel.currentMonth.value ?: return@observe
             updateMonthTitle(year, month)
-            calendarView.setYearMonth(year, month)
+            binding.calendarView.setYearMonth(year, month)
         }
 
         viewModel.currentMonth.observe(this) { month ->
             val year = viewModel.currentYear.value ?: return@observe
             updateMonthTitle(year, month)
-            calendarView.setYearMonth(year, month)
+            binding.calendarView.setYearMonth(year, month)
         }
 
         viewModel.selectedDate.observe(this) { date ->
-            calendarView.setSelectedDate(date)
+            binding.calendarView.setSelectedDate(date)
         }
 
         viewModel.monthlyRecords.observe(this) { records ->
-            calendarView.setRecords(records)
+            binding.calendarView.setRecords(records)
         }
 
         viewModel.selectedRecord.observe(this) { record ->
@@ -90,91 +62,91 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.monthlyStats.observe(this) { stats ->
-            tvGainDays.text = "${stats.gainDays} 天"
-            tvUnchangedDays.text = "${stats.unchangedDays} 天"
-            tvLossDays.text = "${stats.lossDays} 天"
+            binding.tvGainDays.text = "${stats.gainDays} 天"
+            binding.tvUnchangedDays.text = "${stats.unchangedDays} 天"
+            binding.tvLossDays.text = "${stats.lossDays} 天"
 
             val changeStr = if (stats.totalChange > 0) {
                 String.format("+%.1f 斤", stats.totalChange)
             } else {
                 String.format("%.1f 斤", stats.totalChange)
             }
-            tvTotalChange.text = changeStr
+            binding.tvTotalChange.text = changeStr
         }
     }
 
     private fun setupListeners() {
-        findViewById<View>(R.id.btnPrevMonth).setOnClickListener {
+        binding.btnPrevMonth.setOnClickListener {
             viewModel.prevMonth()
         }
 
-        findViewById<View>(R.id.btnNextMonth).setOnClickListener {
+        binding.btnNextMonth.setOnClickListener {
             viewModel.nextMonth()
         }
 
-        calendarView.onDateSelected = { date ->
+        binding.calendarView.onDateSelected = { date ->
             viewModel.selectDate(date)
         }
 
-        fabAdd.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
             showAddRecordDialog()
         }
     }
 
     private fun updateMonthTitle(year: Int, month: Int) {
         val title = viewModel.formatMonthTitle(year, month)
-        tvMonthTitle.text = title
-        tvSummaryMonth.text = title
+        binding.tvMonthTitle.text = title
+        binding.tvSummaryMonth.text = title
     }
 
     private fun updateRecordSection(record: WeightRecord?) {
         if (record != null) {
             // 早
             if (record.morningWeight != null) {
-                tvMorningWeight.text = "早 ${String.format("%.1f", record.morningWeight)}"
-                tvMorningWeight.setTextColor(getColor(R.color.text_primary))
+                binding.tvMorningWeight.text = "早 ${String.format("%.1f", record.morningWeight)}"
+                binding.tvMorningWeight.setTextColor(getColor(R.color.text_primary))
             } else {
-                tvMorningWeight.text = "早 --"
-                tvMorningWeight.setTextColor(getColor(R.color.text_hint))
+                binding.tvMorningWeight.text = "早 --"
+                binding.tvMorningWeight.setTextColor(getColor(R.color.text_hint))
             }
 
             // 中午体重已移除
 
             // 晚
             if (record.eveningWeight != null) {
-                tvEveningWeight.text = "晚 ${String.format("%.1f", record.eveningWeight)}"
-                tvEveningWeight.setTextColor(getColor(R.color.text_primary))
+                binding.tvEveningWeight.text = "晚 ${String.format("%.1f", record.eveningWeight)}"
+                binding.tvEveningWeight.setTextColor(getColor(R.color.text_primary))
             } else {
-                tvEveningWeight.text = "晚 --"
-                tvEveningWeight.setTextColor(getColor(R.color.text_hint))
+                binding.tvEveningWeight.text = "晚 --"
+                binding.tvEveningWeight.setTextColor(getColor(R.color.text_hint))
             }
 
             // 饮食
             if (!record.foodNote.isNullOrBlank()) {
-                tvFoodRecord.text = record.foodNote
-                tvFoodRecord.setTextColor(getColor(R.color.text_primary))
+                binding.tvFoodRecord.text = record.foodNote
+                binding.tvFoodRecord.setTextColor(getColor(R.color.text_primary))
             } else {
-                tvFoodRecord.text = getString(R.string.no_food_record)
-                tvFoodRecord.setTextColor(getColor(R.color.text_hint))
+                binding.tvFoodRecord.text = getString(R.string.no_food_record)
+                binding.tvFoodRecord.setTextColor(getColor(R.color.text_hint))
             }
 
             // 运动
             if (!record.exerciseNote.isNullOrBlank()) {
-                tvExerciseRecord.text = record.exerciseNote
-                tvExerciseRecord.setTextColor(getColor(R.color.text_primary))
+                binding.tvExerciseRecord.text = record.exerciseNote
+                binding.tvExerciseRecord.setTextColor(getColor(R.color.text_primary))
             } else {
-                tvExerciseRecord.text = getString(R.string.no_exercise_record)
-                tvExerciseRecord.setTextColor(getColor(R.color.text_hint))
+                binding.tvExerciseRecord.text = getString(R.string.no_exercise_record)
+                binding.tvExerciseRecord.setTextColor(getColor(R.color.text_hint))
             }
         } else {
-            tvMorningWeight.text = "早 --"
-            tvMorningWeight.setTextColor(getColor(R.color.text_hint))
-            tvEveningWeight.text = "晚 --"
-            tvEveningWeight.setTextColor(getColor(R.color.text_hint))
-            tvFoodRecord.text = getString(R.string.no_food_record)
-            tvFoodRecord.setTextColor(getColor(R.color.text_hint))
-            tvExerciseRecord.text = getString(R.string.no_exercise_record)
-            tvExerciseRecord.setTextColor(getColor(R.color.text_hint))
+            binding.tvMorningWeight.text = "早 --"
+            binding.tvMorningWeight.setTextColor(getColor(R.color.text_hint))
+            binding.tvEveningWeight.text = "晚 --"
+            binding.tvEveningWeight.setTextColor(getColor(R.color.text_hint))
+            binding.tvFoodRecord.text = getString(R.string.no_food_record)
+            binding.tvFoodRecord.setTextColor(getColor(R.color.text_hint))
+            binding.tvExerciseRecord.text = getString(R.string.no_exercise_record)
+            binding.tvExerciseRecord.setTextColor(getColor(R.color.text_hint))
         }
     }
 
