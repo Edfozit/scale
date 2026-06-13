@@ -23,4 +23,7 @@ interface WeightRecordDao {
 
     @Query("DELETE FROM weight_records WHERE date = :date")
     suspend fun deleteByDate(date: String)
+
+    @Query("SELECT * FROM weight_records ORDER BY date DESC")
+    suspend fun getAllRecords(): List<WeightRecord>
 }

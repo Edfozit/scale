@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">体重记录</string>
+    <string name="app_name">称一下</string>
     <string name="tab_list">列表</string>
     <string name="tab_calendar">日历</string>
     <string name="morning_label">早</string>

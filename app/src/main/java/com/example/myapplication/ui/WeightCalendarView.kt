@@ -33,19 +33,17 @@ class WeightCalendarView @JvmOverloads constructor(
         get() = width / 7f
 
     // 统一格子高度（所有行一样高，日期数字对齐）
-    private val cellHeight = 150f
+    private val cellHeight = 155f
 
     // Paint - 日期数字
     private val datePaintSelected = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 26f
+        textSize = 42f
         color = Color.parseColor("#1A1A1A")
-        typeface = android.graphics.Typeface.DEFAULT_BOLD
     }
 
     private val datePaintNormal = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 24f
+        textSize = 40f
         color = Color.parseColor("#1A1A1A")
-        typeface = android.graphics.Typeface.DEFAULT_BOLD
     }
 
     // Paint - 早/中/晚 标签 + 值
@@ -79,20 +77,24 @@ class WeightCalendarView @JvmOverloads constructor(
 
     // Paint - 星期表头
     private val weekHeaderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 24f
+        textSize = 32f
         color = Color.parseColor("#757575")
     }
 
     // Paint - 选中日期背景
     private val selectedBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.parseColor("#E0E0E0")
+        color = Color.parseColor("#D8D8D8")
+    }
+
+    // Paint - 普通格子白色背景
+    private val cellBgPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        color = Color.WHITE
     }
 
     // Paint - 今日标记
     private val todayPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 24f
+        textSize = 42f
         color = Color.parseColor("#2196F3")
-        typeface = android.graphics.Typeface.DEFAULT_BOLD
     }
 
     private val textBounds = Rect()
@@ -105,6 +107,8 @@ class WeightCalendarView @JvmOverloads constructor(
         month = cal.get(Calendar.MONTH) + 1
         selectedDate = formatDate(year, month, cal.get(Calendar.DAY_OF_MONTH))
         recalculate()
+        // 整体背景浅灰色，让白色卡片格子浮现
+        setBackgroundColor(Color.parseColor("#F5F5F5"))
     }
 
     fun setYearMonth(y: Int, m: Int) {
@@ -237,20 +241,26 @@ class WeightCalendarView @JvmOverloads constructor(
                 val left = cw * col
                 val centerX = left + cw / 2f
 
-                // 选中日期背景
+                // 格子间距
+                val gap = 5f
+                val cellLeft = left + gap
+                val cellTop = currentY + gap
+                val cellRight = left + cw - gap
+                val cellBottom = currentY + rowHeight - gap
+                val radius = 18f
+
+                // 先画白色圆角卡片背景（所有日期格子）
+                canvas.drawRoundRect(cellLeft, cellTop, cellRight, cellBottom, radius, radius, cellBgPaint)
+
+                // 选中日期覆盖灰色背景
                 if (isSelected) {
-                    canvas.drawRoundRect(
-                        left + 3f, currentY + 3f,
-                        left + cw - 3f, currentY + rowHeight - 3f,
-                        10f, 10f,
-                        selectedBgPaint
-                    )
+                    canvas.drawRoundRect(cellLeft, cellTop, cellRight, cellBottom, radius, radius, selectedBgPaint)
                 }
 
                 val hasData = record?.morningWeight != null || record?.eveningWeight != null
 
                 // 统一：所有日期数字都在同一位置（格子顶部），保证对齐
-                val dateTopY = currentY + 8f
+                val dateTopY = currentY + 10f
                 val dayText = dayCounter.toString()
                 val datePaint = when {
                     isSelected -> datePaintSelected
@@ -262,7 +272,7 @@ class WeightCalendarView @JvmOverloads constructor(
 
                 if (hasData) {
                     // 有数据：日期数字下方 → 早 → 晚 → 变化
-                    var yOffset = dateTopY + 30f
+                    var yOffset = dateTopY + 48f
 
                     // 2. 早 XX.X
                     if (record?.morningWeight != null) {
