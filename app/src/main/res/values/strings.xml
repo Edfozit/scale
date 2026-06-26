@@ -21,4 +21,22 @@
     <string name="arrow_up">↑</string>
     <string name="arrow_down">↓</string>
     <string name="arrow_right">→</string>
+
+    <!-- 我的记录页 -->
+    <string name="title_my_records">我的记录</string>
+    <string name="action_settings">设置</string>
+    <string name="cat_diet">饮食</string>
+    <string name="cat_water">饮水</string>
+    <string name="cat_diary">日记</string>
+    <string name="cat_measurement">围度</string>
+    <string name="cat_diet_plan">饮食计划</string>
+    <string name="cat_body_photo">形体照</string>
+    <string name="cat_bowel">排便</string>
+    <string name="cat_exercise">运动</string>
+    <string name="cat_weight_team">减肥小队</string>
+    <string name="cat_habit">习惯</string>
+    <string name="no_record_7d">最近 7 天内无记录</string>
+    <string name="no_diet_plan">暂无断食计划</string>
+    <string name="team_join">组队减肥</string>
+    <string name="this_week">本周</string>
 </resources>

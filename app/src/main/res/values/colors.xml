@@ -16,4 +16,11 @@
     <color name="fab_bg">#FFFFFFFF</color>
     <color name="nav_active">#FF1A1A1A</color>
     <color name="nav_inactive">#FF9E9E9E</color>
+    <color name="profile_bg">#FFF5F5F5</color>
+    <color name="profile_card_bg">#FFFFFFFF</color>
+    <color name="profile_text_primary">#FF1A1A1A</color>
+    <color name="profile_text_secondary">#FF757575</color>
+    <color name="profile_divider">#FFE0E0E0</color>
+    <color name="profile_toggle_bg">#FFE0E0E0</color>
+    <color name="profile_toggle_selected">#FF1A1A1A</color>
 </resources>

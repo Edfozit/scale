@@ -3,14 +3,469 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="@color/white">
+    android:background="@color/profile_bg">
 
+    <!-- 标题栏 -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="我"
-        android:textSize="20sp"
-        android:textColor="@color/text_secondary" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="设置"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/profile_text_primary" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 卡片1：账号、我的会员、设备标识 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_profile_card"
+                android:paddingHorizontal="16dp">
+
+                <!-- 账号 -->
+                <LinearLayout
+                    android:id="@+id/row_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="账号"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="点击登录/注册"
+                        android:textSize="11sp"
+                        android:textColor="@color/profile_text_secondary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/profile_divider" />
+
+                <!-- 我的会员 -->
+                <LinearLayout
+                    android:id="@+id/row_membership"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="我的会员"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="普通用户"
+                        android:textSize="11sp"
+                        android:textColor="@color/profile_text_secondary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/profile_divider" />
+
+                <!-- 设备标识 -->
+                <LinearLayout
+                    android:id="@+id/row_device_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="设备标识"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <TextView
+                        android:id="@+id/tv_device_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A8250016"
+                        android:textSize="11sp"
+                        android:textColor="@color/profile_text_secondary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 间距 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <!-- 卡片2：个人信息、阶段性目标 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_profile_card"
+                android:paddingHorizontal="16dp">
+
+                <!-- 个人信息 -->
+                <LinearLayout
+                    android:id="@+id/row_personal_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="个人信息"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/profile_divider" />
+
+                <!-- 阶段性目标 -->
+                <LinearLayout
+                    android:id="@+id/row_goal"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="阶段性目标"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 间距 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <!-- 卡片3：主题色、默认小数点、默认单位 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_profile_card"
+                android:paddingHorizontal="16dp">
+
+                <!-- 主题色 -->
+                <LinearLayout
+                    android:id="@+id/row_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="主题色"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <TextView
+                        android:id="@+id/tv_theme_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="黑白灰"
+                        android:textSize="11sp"
+                        android:textColor="@color/profile_text_secondary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/profile_divider" />
+
+                <!-- 默认小数点 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="默认小数点"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <LinearLayout
+                        android:id="@+id/segment_decimal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_segment_container"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/tv_decimal_0"
+                            android:layout_width="52dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text=".0"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_text_primary"
+                            android:background="@drawable/bg_segment_selected" />
+
+                        <TextView
+                            android:id="@+id/tv_decimal_00"
+                            android:layout_width="52dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text=".00"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_text_secondary" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/profile_divider" />
+
+                <!-- 默认单位 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="默认单位"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <LinearLayout
+                        android:id="@+id/segment_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_segment_container"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:id="@+id/tv_unit_kg"
+                            android:layout_width="52dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="公斤"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_unit_jin"
+                            android:layout_width="52dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="斤"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_text_primary"
+                            android:background="@drawable/bg_segment_selected" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 间距 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="12dp" />
+
+            <!-- 卡片4：iCloud状态、iCloud同步、苹果健康同步 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_profile_card"
+                android:paddingHorizontal="16dp">
+
+                <!-- iCloud状态 -->
+                <LinearLayout
+                    android:id="@+id/row_icloud_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="iCloud状态"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <TextView
+                        android:id="@+id/tv_icloud_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="iCloud 同步已关闭"
+                        android:textSize="11sp"
+                        android:textColor="@color/profile_text_secondary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/profile_divider" />
+
+                <!-- iCloud同步 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="iCloud同步"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switch_icloud"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumbTint="@color/white"
+                        android:trackTint="#FFC8C8CC" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/profile_divider" />
+
+                <!-- 苹果健康同步 -->
+                <LinearLayout
+                    android:id="@+id/row_health_sync"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="苹果健康同步"
+                        android:textSize="13sp"
+                        android:textColor="@color/profile_text_primary" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#FFC7C7CC"
+                        android:contentDescription="更多" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 底部间距 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
