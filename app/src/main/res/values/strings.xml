@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">称一下</string>
+    <string name="fragment_record">记录</string>
+    <string name="fragment_img">图表</string>
+    <string name="fragment_calendar">日历</string>
+    <string name="fragment_my">我的</string>
     <string name="tab_list">列表</string>
     <string name="tab_calendar">日历</string>
     <string name="morning_label">早</string>
@@ -39,4 +43,45 @@
     <string name="no_diet_plan">暂无断食计划</string>
     <string name="team_join">组队减肥</string>
     <string name="this_week">本周</string>
+
+    <!-- 记录分类 Dialog -->
+    <string name="dialog_diet_title">饮食记录</string>
+    <string name="dialog_water_title">饮水记录</string>
+    <string name="dialog_diary_title">日记</string>
+    <string name="dialog_measurement_title">围度记录</string>
+    <string name="dialog_diet_plan_title">饮食计划</string>
+    <string name="dialog_bowel_title">排便记录</string>
+    <string name="dialog_exercise_title">运动记录</string>
+    <string name="dialog_habit_title">习惯管理</string>
+
+    <string name="hint_diet">请输入饮食内容</string>
+    <string name="hint_water">请输入饮水量（ml）</string>
+    <string name="hint_diary">写下今天的想法…</string>
+    <string name="hint_measurement_chest">胸围（cm）</string>
+    <string name="hint_measurement_waist">腰围（cm）</string>
+    <string name="hint_measurement_hip">臀围（cm）</string>
+    <string name="hint_measurement_thigh">大腿围（cm）</string>
+    <string name="hint_measurement_arm">手臂围（cm）</string>
+    <string name="hint_diet_plan">请输入饮食计划内容</string>
+    <string name="hint_exercise">请输入运动内容</string>
+    <string name="hint_habit">请输入习惯内容</string>
+
+    <string name="recorded_count">已记录 %d 次</string>
+    <string name="feature_developing">功能开发中</string>
+    <string name="add_habit">添加习惯</string>
+
+    <!-- 饮食记录页面 -->
+    <string name="title_diet_record">饮食记录</string>
+    <string name="action_back">返回</string>
+    <string name="action_calendar">日历</string>
+    <string name="add_diet_entry">添加饮食</string>
+    <string name="label_meal_type">餐次</string>
+    <string name="label_time">时间</string>
+    <string name="action_pick_time">选择时间</string>
+    <string name="hint_food_content">请输入食物内容</string>
+    <string name="meal_breakfast">早餐</string>
+    <string name="meal_lunch">午餐</string>
+    <string name="meal_dinner">晚餐</string>
+    <string name="meal_snack">加餐</string>
+    <string name="no_diet_record">暂无饮食记录</string>
 </resources>

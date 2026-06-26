@@ -5,10 +5,11 @@ import androidx.room3.Database
 import androidx.room3.Room
 import androidx.room3.RoomDatabase
 
-@Database(entities = [WeightRecord::class], version = 3, exportSchema = false)
+@Database(entities = [WeightRecord::class, DietEntry::class], version = 5, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun weightRecordDao(): WeightRecordDao
+    abstract fun dietEntryDao(): DietEntryDao
 
     companion object {
         @Volatile

@@ -26,4 +26,7 @@ interface WeightRecordDao {
 
     @Query("SELECT * FROM weight_records ORDER BY date DESC")
     suspend fun getAllRecords(): List<WeightRecord>
+
+    @Query("SELECT * FROM weight_records WHERE date >= :startDate ORDER BY date DESC")
+    suspend fun getRecentRecords(startDate: String): List<WeightRecord>
 }

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_bowel_title"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/this_week"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp" />
+
+    <!-- 星期标签行 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="一"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="二"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="三"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="四"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="五"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="六"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="日"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <!-- 圆圈行（可点击） -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/circleDay1"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bowel_circle" />
+
+        <View
+            android:id="@+id/circleDay2"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bowel_circle" />
+
+        <View
+            android:id="@+id/circleDay3"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bowel_circle" />
+
+        <View
+            android:id="@+id/circleDay4"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bowel_circle" />
+
+        <View
+            android:id="@+id/circleDay5"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bowel_circle" />
+
+        <View
+            android:id="@+id/circleDay6"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bowel_circle" />
+
+        <View
+            android:id="@+id/circleDay7"
+            android:layout_width="0dp"
+            android:layout_height="28dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_bowel_circle" />
+
+    </LinearLayout>
+
+    <!-- 按钮区 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancel"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/confirm" />
+
+    </LinearLayout>
+
+</LinearLayout>

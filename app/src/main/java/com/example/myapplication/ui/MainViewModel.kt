@@ -43,6 +43,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _allRecords = MutableLiveData<List<WeightRecord>>()
     val allRecords: LiveData<List<WeightRecord>> = _allRecords
 
+    private val _recentRecords = MutableLiveData<List<WeightRecord>>()
+    val recentRecords: LiveData<List<WeightRecord>> = _recentRecords
+
     init {
         val today = formatDate(
             Calendar.getInstance().get(Calendar.YEAR),
@@ -52,6 +55,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         _selectedDate.value = today
         loadMonthData()
         loadAllRecords()
+        loadRecentRecords()
     }
 
     fun setYearMonth(year: Int, month: Int) {
@@ -90,6 +94,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             dao.insert(record)
             loadMonthData()
             loadAllRecords()
+            loadRecentRecords()
             updateSelectedRecord()
         }
     }
@@ -193,6 +198,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val records = dao.getAllRecords()
             _allRecords.postValue(records)
+        }
+    }
+
+    fun loadRecentRecords() {
+        viewModelScope.launch {
+            val cal = Calendar.getInstance()
+            cal.add(Calendar.DAY_OF_MONTH, -7)
+            val startDate = formatDate(
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH) + 1,
+                cal.get(Calendar.DAY_OF_MONTH)
+            )
+            val records = dao.getRecentRecords(startDate)
+            _recentRecords.postValue(records)
         }
     }
 }
