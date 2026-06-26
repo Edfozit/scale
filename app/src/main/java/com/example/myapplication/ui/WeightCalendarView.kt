@@ -33,7 +33,7 @@ class WeightCalendarView @JvmOverloads constructor(
         get() = width / 7f
 
     // 统一格子高度（所有行一样高，日期数字对齐）
-    private val cellHeight = 155f
+    private val cellHeight = 175f
 
     // Paint - 日期数字
     private val datePaintSelected = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -48,30 +48,30 @@ class WeightCalendarView @JvmOverloads constructor(
 
     // Paint - 早/中/晚 标签 + 值
     private val weightLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 16f
+        textSize = 22f
         color = Color.parseColor("#9E9E9E")
     }
 
     private val weightValuePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 18f
+        textSize = 22f
         color = Color.parseColor("#424242")
     }
 
     // Paint - 变化值
     private val changeGainPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 16f
+        textSize = 30f
         color = Color.parseColor("#F44336")
         typeface = android.graphics.Typeface.DEFAULT_BOLD
     }
 
     private val changeLossPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 16f
+        textSize = 30f
         color = Color.parseColor("#4CAF50")
         typeface = android.graphics.Typeface.DEFAULT_BOLD
     }
 
     private val changeUnchangedPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        textSize = 16f
+        textSize = 30f
         color = Color.parseColor("#9E9E9E")
     }
 
@@ -272,14 +272,14 @@ class WeightCalendarView @JvmOverloads constructor(
 
                 if (hasData) {
                     // 有数据：日期数字下方 → 早 → 晚 → 变化
-                    var yOffset = dateTopY + 48f
+                    var yOffset = dateTopY + 56f
 
                     // 2. 早 XX.X
                     if (record?.morningWeight != null) {
                         val text = "早 ${String.format("%.1f", record.morningWeight)}"
                         weightValuePaint.getTextBounds(text, 0, text.length, textBounds)
                         canvas.drawText(text, centerX - textBounds.width() / 2f, yOffset + textBounds.height(), weightValuePaint)
-                        yOffset += 22f
+                        yOffset += 30f
                     }
 
                     // 4. 晚 XX.X
@@ -287,7 +287,7 @@ class WeightCalendarView @JvmOverloads constructor(
                         val text = "晚 ${String.format("%.1f", record.eveningWeight)}"
                         weightValuePaint.getTextBounds(text, 0, text.length, textBounds)
                         canvas.drawText(text, centerX - textBounds.width() / 2f, yOffset + textBounds.height(), weightValuePaint)
-                        yOffset += 22f
+                        yOffset += 30f
                     }
 
                     // 5. 变化值（与前一日早重对比）
