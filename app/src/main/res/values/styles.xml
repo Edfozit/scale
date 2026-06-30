@@ -3,6 +3,7 @@
     <!-- BottomNavigationView 透明活动指示器 -->
     <style name="Widget.MyApp.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
         <item name="itemActiveIndicatorStyle">@style/Widget.MyApp.BottomNavigationView.ActiveIndicator</item>
+        <item name="itemPaddingVertical">14dp</item>
     </style>
 
     <style name="Widget.MyApp.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
