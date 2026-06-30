@@ -1,12 +1,19 @@
 package com.example.myapplication.ui
 
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+import com.example.myapplication.databinding.DialogThemePickerBinding
 import com.example.myapplication.databinding.FragmentProfileBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ProfileFragment : Fragment() {
 
@@ -26,6 +33,9 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDecimalSegment()
         setupUnitSegment()
+        binding.rowTheme.setOnClickListener {
+            showThemePickerDialog()
+        }
     }
 
     /** 默认小数点分段控件 */
@@ -66,6 +76,102 @@ class ProfileFragment : Fragment() {
             tvUnitKg.background = null
             tvUnitKg.setTextColor(resources.getColor(R.color.profile_text_secondary, null))
         }
+    }
+
+    private fun showThemePickerDialog(){
+        val dialog = BottomSheetDialog(requireContext())
+        val dialogBinding= DialogThemePickerBinding.inflate(layoutInflater)
+
+        dialogBinding.root.background= ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.bg_profile_card
+        )
+        dialog.setContentView(dialogBinding.root)
+
+        val gray=ContextCompat.getColor(requireContext(),R.color.theme_gray)
+        val blue=ContextCompat.getColor(requireContext(),R.color.theme_blue)
+        val yellow=ContextCompat.getColor(requireContext(),R.color.theme_yellow)
+        val pink=ContextCompat.getColor(requireContext(),R.color.theme_pink)
+        dialogBinding.colorGray.background=createCircleDrawable(gray,true)
+        dialogBinding.colorBlue.background=createCircleDrawable(blue,false)
+        dialogBinding.colorYellow.background=createCircleDrawable(yellow,false)
+        dialogBinding.colorPink.background=createCircleDrawable(pink,false)
+        dialogBinding.colorGray.setOnClickListener {
+            dialogBinding.colorGray.background=createCircleDrawable(gray,false)
+            dialogBinding.colorBlue.background=createCircleDrawable(blue,false)
+            dialogBinding.colorYellow.background=createCircleDrawable(yellow,false)
+            dialogBinding.colorPink.background=createCircleDrawable(pink,false)
+
+            dialogBinding.colorGray.background=createCircleDrawable(gray,true)
+
+            saveTheme("gray")
+
+            binding.tvThemeValue.text="黑白灰"
+
+            dialog.dismiss()
+        }
+        dialogBinding.colorBlue.setOnClickListener {
+            dialogBinding.colorGray.background=createCircleDrawable(gray,false)
+            dialogBinding.colorBlue.background=createCircleDrawable(blue,false)
+            dialogBinding.colorYellow.background=createCircleDrawable(yellow,false)
+            dialogBinding.colorPink.background=createCircleDrawable(pink,false)
+
+            dialogBinding.colorBlue.background=createCircleDrawable(blue,true)
+
+            saveTheme("blue")
+
+            binding.tvThemeValue.text="蓝色"
+
+            dialog.dismiss()
+        }
+        dialogBinding.colorYellow.setOnClickListener {
+            dialogBinding.colorGray.background=createCircleDrawable(gray,false)
+            dialogBinding.colorBlue.background=createCircleDrawable(blue,false)
+            dialogBinding.colorYellow.background=createCircleDrawable(yellow,false)
+            dialogBinding.colorPink.background=createCircleDrawable(pink,false)
+
+            dialogBinding.colorYellow.background=createCircleDrawable(yellow,true)
+
+            saveTheme("yellow")
+
+            binding.tvThemeValue.text="黄色"
+
+            dialog.dismiss()
+
+        }
+        dialogBinding.colorPink.setOnClickListener {
+            dialogBinding.colorGray.background=createCircleDrawable(gray,false)
+            dialogBinding.colorBlue.background=createCircleDrawable(blue,false)
+            dialogBinding.colorYellow.background=createCircleDrawable(yellow,false)
+            dialogBinding.colorPink.background=createCircleDrawable(pink,false)
+
+            dialogBinding.colorPink.background=createCircleDrawable(pink,true)
+
+            saveTheme("pink")
+
+            binding.tvThemeValue.text="粉色"
+            dialog.dismiss()
+
+        }
+
+        dialog.show()
+    }
+
+    private fun createCircleDrawable(color: Int, selected: Boolean): GradientDrawable {
+        return GradientDrawable().apply {
+            shape = GradientDrawable.OVAL
+            setColor(color)
+            if (selected) {
+                setStroke(6, Color.BLACK)
+            }
+            setSize(108, 108)
+        }
+    }
+
+    private fun saveTheme(theme: String) {
+        val prefs = requireContext().getSharedPreferences("app_settings", Context.MODE_PRIVATE)
+        prefs.edit().putString("theme_color", theme).apply()
+        (activity as? MainActivity)?.applyThemeColor()
     }
 
     override fun onDestroyView() {

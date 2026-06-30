@@ -229,8 +229,7 @@ class WeightCalendarView @JvmOverloads constructor(
 
                 val dateStr = formatDate(year, month, dayCounter)
                 val record = records[dateStr]
-                val prevDateStr = getPreviousDate(dateStr)
-                val prevRecord = records[prevDateStr]
+                val prevRecord = findLatestPreviousRecord(dateStr)
                 val isSelected = dateStr == selectedDate
                 val isToday = dateStr == formatDate(
                     Calendar.getInstance().get(Calendar.YEAR),
@@ -271,12 +270,12 @@ class WeightCalendarView @JvmOverloads constructor(
                 canvas.drawText(dayText, centerX - textBounds.width() / 2f, dateTopY + textBounds.height(), datePaint)
 
                 if (hasData) {
-                    // 有数据：日期数字下方 → 早 → 晚 → 变化
+                    // 有数据：日期数字下方 → 早 → 晚 → 变化 （日历）
                     var yOffset = dateTopY + 56f
 
                     // 2. 早 XX.X
                     if (record?.morningWeight != null) {
-                        val text = "早 ${String.format("%.1f", record.morningWeight)}"
+                        val text = " ${String.format("%.1f", record.morningWeight)}"
                         weightValuePaint.getTextBounds(text, 0, text.length, textBounds)
                         canvas.drawText(text, centerX - textBounds.width() / 2f, yOffset + textBounds.height(), weightValuePaint)
                         yOffset += 30f
@@ -284,7 +283,7 @@ class WeightCalendarView @JvmOverloads constructor(
 
                     // 4. 晚 XX.X
                     if (record?.eveningWeight != null) {
-                        val text = "晚 ${String.format("%.1f", record.eveningWeight)}"
+                        val text = " ${String.format("%.1f", record.eveningWeight)}"
                         weightValuePaint.getTextBounds(text, 0, text.length, textBounds)
                         canvas.drawText(text, centerX - textBounds.width() / 2f, yOffset + textBounds.height(), weightValuePaint)
                         yOffset += 30f
@@ -403,5 +402,18 @@ class WeightCalendarView @JvmOverloads constructor(
             cal.get(Calendar.MONTH) + 1,
             cal.get(Calendar.DAY_OF_MONTH)
         )
+    }
+
+    /** 查找最近一个有早体重数据的前置记录，跳过中间无数据的日期 */
+    private fun findLatestPreviousRecord(dateStr: String): WeightRecord? {
+        var currentDateStr = dateStr
+        for (i in 0 until 30) {
+            currentDateStr = getPreviousDate(currentDateStr)
+            val record = records[currentDateStr]
+            if (record?.morningWeight != null) {
+                return record
+            }
+        }
+        return null
     }
 }

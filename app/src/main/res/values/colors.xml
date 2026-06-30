@@ -23,4 +23,24 @@
     <color name="profile_divider">#FFE0E0E0</color>
     <color name="profile_toggle_bg">#FFE0E0E0</color>
     <color name="profile_toggle_selected">#FF1A1A1A</color>
+
+    <!-- 黑白灰主题 -->
+    <color name="theme_gray">#FF1A1A1A</color>
+    <color name="theme_gray_bg">#FFF5F5F5</color>
+    <color name="theme_gray_card">#FFFFFFFF</color>
+
+    <color name="theme_blue">#4169E1</color>
+    <color name="theme_yellow">#B8860B</color>
+    <color name="theme_pink">#FF007F</color>
+    <!-- 蓝色主题背景 -->
+    <color name="theme_blue_bg">#F0F4FF</color>
+    <color name="theme_blue_card">#F7F9FF</color>
+
+    <!-- 黄色主题背景 -->
+    <color name="theme_yellow_bg">#FFFDF0</color>
+    <color name="theme_yellow_card">#FFFEF7</color>
+
+    <!-- 粉色主题背景 -->
+    <color name="theme_pink_bg">#FFF0F3</color>
+    <color name="theme_pink_card">#FFF7F8</color>
 </resources>

@@ -84,4 +84,9 @@
     <string name="meal_dinner">晚餐</string>
     <string name="meal_snack">加餐</string>
     <string name="no_diet_record">暂无饮食记录</string>
+    <string name="dialog_theme_title">选择主题色</string>
+    <string name="theme_gray">黑白灰</string>
+    <string name="theme_blue">蓝色</string>
+    <string name="theme_yellow">黄色</string>
+    <string name="theme_pink">粉色</string>
 </resources>

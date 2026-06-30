@@ -1,9 +1,12 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        applyThemeColor()
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -71,5 +75,30 @@ class MainActivity : AppCompatActivity() {
             ft.show(fragment)
         }
         ft.commitNow()
+    }
+
+    fun applyThemeColor() {
+        val prefs = getSharedPreferences("app_settings", Context.MODE_PRIVATE)
+        val themeColor = prefs.getString("theme_color", "gray") ?: "gray"
+
+        val bgColor = when (themeColor) {
+            "gray" -> ContextCompat.getColor(this, R.color.theme_gray_bg)
+            "blue" -> ContextCompat.getColor(this, R.color.theme_blue_bg)
+            "yellow" -> ContextCompat.getColor(this, R.color.theme_yellow_bg)
+            "pink" -> ContextCompat.getColor(this, R.color.theme_pink_bg)
+            else -> ContextCompat.getColor(this, R.color.theme_gray_bg)
+        }
+        val color = when (themeColor) {
+            "gray" -> ContextCompat.getColor(this, R.color.theme_gray)
+            "blue" -> ContextCompat.getColor(this, R.color.theme_blue)
+            "yellow" -> ContextCompat.getColor(this, R.color.theme_yellow)
+            "pink" -> ContextCompat.getColor(this, R.color.theme_pink)
+            else -> ContextCompat.getColor(this, R.color.theme_gray)
+        }
+
+        binding.bottomNavigation.itemIconTintList = ColorStateList.valueOf(color)
+        binding.bottomNavigation.itemTextColor = ColorStateList.valueOf(color)
+        // 改 MainActivity 根布局背景
+        binding.main.setBackgroundColor(bgColor)
     }
 }
