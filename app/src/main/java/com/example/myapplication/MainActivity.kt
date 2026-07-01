@@ -12,6 +12,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.tools.ThemeHelper
 import com.example.myapplication.ui.CalendarFragment
 import com.example.myapplication.ui.ChartFragment
 import com.example.myapplication.ui.ProfileFragment
@@ -81,13 +82,7 @@ class MainActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("app_settings", Context.MODE_PRIVATE)
         val themeColor = prefs.getString("theme_color", "gray") ?: "gray"
 
-        val bgColor = when (themeColor) {
-            "gray" -> ContextCompat.getColor(this, R.color.theme_gray_bg)
-            "blue" -> ContextCompat.getColor(this, R.color.theme_blue_bg)
-            "yellow" -> ContextCompat.getColor(this, R.color.theme_yellow_bg)
-            "pink" -> ContextCompat.getColor(this, R.color.theme_pink_bg)
-            else -> ContextCompat.getColor(this, R.color.theme_gray_bg)
-        }
+        val bgColor = ThemeHelper.getThemeBgColor(this)
         val color = when (themeColor) {
             "gray" -> ContextCompat.getColor(this, R.color.theme_gray)
             "blue" -> ContextCompat.getColor(this, R.color.theme_blue)
@@ -98,7 +93,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.itemIconTintList = ColorStateList.valueOf(color)
         binding.bottomNavigation.itemTextColor = ColorStateList.valueOf(color)
-        // 改 MainActivity 根布局背景
         binding.main.setBackgroundColor(bgColor)
+
+        calendarFragment.view?.setBackgroundColor(bgColor)
+        chartFragment.view?.setBackgroundColor(bgColor)
+        recordsFragment.view?.setBackgroundColor(bgColor)
+        profileFragment.view?.setBackgroundColor(bgColor)
     }
 }

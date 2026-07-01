@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.data.WeightRecord
 import com.example.myapplication.databinding.FragmentRecordsBinding
+import com.example.myapplication.tools.ThemeHelper
 import com.google.android.material.textfield.TextInputEditText
 import java.util.Calendar
 import java.util.Locale
@@ -42,6 +43,7 @@ class RecordsFragment : Fragment() {
 
         setupCardClickListeners()
         observeRecentRecords()
+        binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
     }
 
     // ==================== 卡片点击监听 ====================
@@ -508,6 +510,13 @@ class RecordsFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
+        }
     }
 
     override fun onDestroyView() {

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.databinding.FragmentChartBinding
+import com.example.myapplication.tools.ThemeHelper
 
 class ChartFragment : Fragment() {
 
@@ -32,6 +33,7 @@ class ChartFragment : Fragment() {
 
         setupObservers()
         setupListeners()
+        binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
     }
 
     private fun setupObservers() {
@@ -101,6 +103,7 @@ class ChartFragment : Fragment() {
         super.onHiddenChanged(hidden)
         if (!hidden) {
             viewModel.loadData(viewModel.currentDays)
+            binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
         }
     }
 

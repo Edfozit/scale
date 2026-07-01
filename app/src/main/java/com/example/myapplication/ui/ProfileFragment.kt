@@ -13,6 +13,7 @@ import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.DialogThemePickerBinding
 import com.example.myapplication.databinding.FragmentProfileBinding
+import com.example.myapplication.tools.ThemeHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ProfileFragment : Fragment() {
@@ -33,6 +34,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDecimalSegment()
         setupUnitSegment()
+        binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
         binding.rowTheme.setOnClickListener {
             showThemePickerDialog()
         }
@@ -172,6 +174,13 @@ class ProfileFragment : Fragment() {
         val prefs = requireContext().getSharedPreferences("app_settings", Context.MODE_PRIVATE)
         prefs.edit().putString("theme_color", theme).apply()
         (activity as? MainActivity)?.applyThemeColor()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
+        }
     }
 
     override fun onDestroyView() {

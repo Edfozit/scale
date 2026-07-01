@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
 import com.example.myapplication.data.WeightRecord
 import com.example.myapplication.databinding.FragmentCalendarBinding
+import com.example.myapplication.tools.ThemeHelper
 
 class CalendarFragment : Fragment() {
 
@@ -40,6 +41,7 @@ class CalendarFragment : Fragment() {
         setupObservers()
         setupListeners()
         switchTab(false)
+        binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
     }
 
     private fun setupRecyclerView() {
@@ -225,6 +227,13 @@ class CalendarFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            binding.root.setBackgroundColor(ThemeHelper.getThemeBgColor(requireContext()))
+        }
     }
 
     override fun onDestroyView() {

@@ -107,8 +107,8 @@ class WeightCalendarView @JvmOverloads constructor(
         month = cal.get(Calendar.MONTH) + 1
         selectedDate = formatDate(year, month, cal.get(Calendar.DAY_OF_MONTH))
         recalculate()
-        // 整体背景浅灰色，让白色卡片格子浮现
-        setBackgroundColor(Color.parseColor("#F5F5F5"))
+        // 背景透明，让主题色透出来
+        setBackgroundColor(Color.TRANSPARENT)
     }
 
     fun setYearMonth(y: Int, m: Int) {
